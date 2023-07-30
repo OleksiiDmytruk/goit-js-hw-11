@@ -14,6 +14,8 @@ let value = '';
 let page = 1;
 let imgQuantity = 40;
 
+const gallery = new SimpleLightbox('.gallery .photo-card a');
+
 elements.loadMoreBtnEl.classList.add('hidden');
 
 function getImages(evt) {
@@ -33,6 +35,7 @@ function getImages(evt) {
         elements.galleryEl.innerHTML = galleyMarkup;
         const imagesQuantity = resp.totalHits;
         Notiflix.Notify.info(`Hooray! We found ${imagesQuantity} images.`);
+        gallery.refresh();
       }
     })
     .catch(err => {
@@ -55,6 +58,7 @@ function addMoreImage(evt) {
       }
       const galleyMarkup = addGalleryMarkup(resp);
       elements.galleryEl.insertAdjacentHTML('beforeend', galleyMarkup);
+      gallery.refresh();
     })
     .catch(err => {
       Notiflix.Report.failure(
