@@ -13,8 +13,8 @@ const instance = axios.create({
   params,
 });
 
-export function getSearch(value, page) {
-  return instance.get(`?q=${value}&page=${page}`).then(resp => {
-    return resp.data;
-  });
+export async function getSearch(value, page) {
+  const respons = await instance.get(`?q=${value}&page=${page}`);
+  const data = respons.data;
+  return data;
 }
